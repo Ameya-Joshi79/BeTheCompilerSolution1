@@ -44,8 +44,31 @@ fun main(args:Array<String>){
     println("Sum of All Ints converted to Double in this collection using the sumOf -> Double Higher Order Function = $sumInts4")
 
 
-    
+    /*
+        PIZZA TESTS
+     */
 
+//    The following won't compile as Pizza is a custom class which does not Explicitly implement the Comparable Interface
+//    So there is no way to compare the Objects to get the Lowest Value
+//    val lowPrice = pizzas.min()
+
+    //Compiles successfully
+    val lowPrice2:Pizza = pizzas.minBy { it.pricePerSlice }
+
+    //Will compile
+    val highQuantity:Pizza = pizzas.maxBy { p:Pizza ->
+        p.quantity
+    }
+
+    //Will Compile
+    val highQuantity3 = pizzas.maxBy { it.quantity }
+
+//    The sumBy and sumByDouble functions have been deprecated. The following won't run anyways since the Lambda expression
+//    for sumBy expects a return type of Int. The following returns a Double
+//    val totalPrice = pizzas.sumBy { it.quantity * it.pricePerSlice }
+
+    //Compiles successfully
+    val totalPrice2 = pizzas.sumOf { it.pricePerSlice * it.quantity }
 
 
 }
